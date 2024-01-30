@@ -62,7 +62,10 @@ function AddToCart() {
         </thead>
         <tbody>
           {cartItems.map((item) => (
-            <tr key={item.ProductName} className="border-b transition ease-in-out delay-150  hover:shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] hover: duration-200 rounded">
+            <tr
+              key={item.ProductName}
+              className="border-b transition ease-in-out delay-150  hover:shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] hover: duration-200 rounded"
+            >
               <td className="py-2 px-4  font-semibold">{item.ProductName}</td>
               <td className="py-2 px-4 ">{formatCurrency(item.Price)}</td>
               <td className="py-2 px-4 justify-center">
@@ -100,6 +103,9 @@ function AddToCart() {
               </td>
             </tr>
           ))}
+          <tr className="border-b transition ease-in-out delay-150  hover:shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] hover: duration-200 rounded">
+            <td className="py-2 px-4 font-bold">Total</td>
+          </tr>
         </tbody>
       </table>
     </div>

@@ -35,7 +35,7 @@ function HomePage({ data }) {
   const handleIncrement = (productId) => {
     setQuantity((prevQuantities) => ({
       ...prevQuantities,
-      [productId]: (prevQuantities[productId] || 0) + 1,
+      [productId]: (prevQuantities[productId] || 1) + 1,
     }));
   };
 
@@ -49,7 +49,7 @@ function HomePage({ data }) {
   };
 
   const handleAddToCart = (productId) => {
-    addToCart(productId, quantity[productId.id] || 0);
+    addToCart(productId, quantity[productId.id] || 1);
 
     navigate("/Cart-list")
   };
@@ -114,7 +114,7 @@ function HomePage({ data }) {
               <input
                 type="text"
                 className="w-7 text-center rounded-lg"
-                value={quantity[product.id] || 0}
+                value={quantity[product.id] || 1}
                 readOnly
               />
               <button className="bg-green-500 text-white py-1 px-3 w-10 rounded-lg mb-3 active:bg-green-300" onClick={() => handleDecrement(product.id)}>
