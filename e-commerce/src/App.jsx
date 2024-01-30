@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import HomePage from "./Component/HomePage";
+import AddToCart from "./Component/CheckOut";
 import axios from "axios";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const baseURL = "https://fakestoreapi.com/products";
 
@@ -19,8 +21,14 @@ function App() {
   return (
     <div>
       {data ? (
-        <>
-          <HomePage data={data} />
+        <>   
+          <Router>
+            <Routes>
+              <Route path="/" element={<HomePage data={data} />}/>
+
+              <Route path="/Cart-list" element={<AddToCart data={data}/>}/>
+            </Routes>
+          </Router>
         </>
       ) : (
         <div
