@@ -7,9 +7,9 @@ function HomePage({ data }) {
   const [searchItem, setSearchItem] = useState("");
   const [priceSort, setPriceSort] = useState("");
   const [ratingSort, setRatingSort] = useState("");
-  const [quantity, setQuantity] = useState({})
-  const navigate = useNavigate()
-
+  const [quantity, setQuantity] = useState({});
+  const [itemCount, setItemCount] = useState("")
+  const navigate = useNavigate();
 
   let searchedItem = data.filter((product) => {
     const search = product.title
@@ -51,7 +51,17 @@ function HomePage({ data }) {
   const handleAddToCart = (productId) => {
     addToCart(productId, quantity[productId.id] || 1);
 
-    navigate("/Cart-list")
+    alert("Item succesfully added to Cart list!!")
+    
+
+  };
+
+  const handleCartNavigate = () => {
+    
+        setItemCount(Math.max(itemCount + 1))
+    
+
+    navigate("/Cart-list");
   };
 
   return (
@@ -83,13 +93,20 @@ function HomePage({ data }) {
         <option value="Highest">Highest</option>
       </select>
 
+      <button 
+      className="bg-yellow-300 py-1 px-3 rounded-lg"
+      onClick={() => handleCartNavigate()}
+      >
+        Check CartList
+      </button>
+
       <br />
       <br />
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {searchedItem.map((product) => (
           <div
             key={product.id}
-            className="grid shadow-md p-4 transition-transform hover:scale-105"
+            className="grid shadow-md p-4 transition-transform hover:scale-105 hover:shadow-xl"
           >
             <img
               src={product.image}
@@ -108,19 +125,28 @@ function HomePage({ data }) {
               <p className="text-gray-500">({product.rating.count} reviews)</p>
             </div>
             <div className="space-x-2">
-              <button className="bg-green-500 text-white py-1 px-3 w-10 rounded-lg mb-3 active:bg-green-300" onClick={() => handleIncrement(product.id)}>
+              <button
+                className="bg-green-500 text-white py-1 px-3 w-10 rounded-lg mb-3 active:bg-green-300"
+                onClick={() => handleIncrement(product.id)}
+              >
                 +
               </button>
               <input
                 type="text"
-                className="w-7 text-center rounded-lg"
+                className="w-7 text-center rounded-lg outline-none"
                 value={quantity[product.id] || 1}
                 readOnly
               />
-              <button className="bg-green-500 text-white py-1 px-3 w-10 rounded-lg mb-3 active:bg-green-300" onClick={() => handleDecrement(product.id)}>
+              <button
+                className="bg-green-500 text-white py-1 px-3 w-10 rounded-lg mb-3 active:bg-green-300"
+                onClick={() => handleDecrement(product.id)}
+              >
                 -
               </button>
-              <button className="bg-blue-500 text-white px-3 py-1 rounded-lg active:bg-blue-300" onClick={() => handleAddToCart(product)}>
+              <button
+                className="bg-blue-500 text-white px-3 py-1 rounded-lg active:bg-blue-300"
+                onClick={() => handleAddToCart(product)}
+              >
                 Add To cart
               </button>
             </div>
