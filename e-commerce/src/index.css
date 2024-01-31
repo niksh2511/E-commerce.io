@@ -2,3 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.productCount {
+    position: absolute;
+    top: -2px;
+    right: 150px;
+    background-color: greenyellow;
+    border-radius: 100%;
+    padding: 0.3px 5px;
+    color: white
+}

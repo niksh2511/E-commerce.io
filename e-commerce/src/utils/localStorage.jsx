@@ -13,7 +13,6 @@ export const getCartItems = () => {
       cartItems[existingProductIndex].Quantity += quantity;
     } else {
       const cartItem = {
-        Id: product.id,
         ProductName: product.title,
         Price: product.price,
         Quantity: quantity,

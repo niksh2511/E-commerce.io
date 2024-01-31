@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import HomePage from "./Component/HomePage";
 import AddToCart from "./Component/CheckOut";
-import Navbar from "./Component/Navbar";
 import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -22,12 +21,13 @@ function App() {
   return (
     <div>
       {data ? (
-        <>
+        <>   
           <Router>
-            <Navbar data={data}/>
+            <Navbar />
             <Routes>
-              <Route path="/" element={<HomePage data={data} />} />
-              <Route path="/Cart-list" element={<AddToCart data={data} />} />
+              <Route path="/" element={<HomePage data={data} />}/>
+
+              <Route path="/Cart-list" element={<AddToCart data={data}/>}/>
             </Routes>
           </Router>
         </>
