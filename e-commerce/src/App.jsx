@@ -24,7 +24,7 @@ function App() {
       {data ? (
         <>
           <Router>
-            <Navbar />
+            <Navbar data={data}/>
             <Routes>
               <Route path="/" element={<HomePage data={data} />} />
               <Route path="/Cart-list" element={<AddToCart data={data} />} />

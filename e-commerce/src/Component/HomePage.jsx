@@ -3,34 +3,34 @@ import { addToCart } from "../utils/localStorage";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
 
-function HomePage({ data }) {
-  const [searchItem, setSearchItem] = useState("");
-  const [priceSort, setPriceSort] = useState("");
-  const [ratingSort, setRatingSort] = useState("");
+function HomePage({ searchedItem }) {
+  // const [searchItem, setSearchItem] = useState("");
+  // const [priceSort, setPriceSort] = useState("");
+  // const [ratingSort, setRatingSort] = useState("");
   const [quantity, setQuantity] = useState({});
   const [itemCount, setItemCount] = useState("")
   const navigate = useNavigate();
 
-  let searchedItem = data.filter((product) => {
-    const search = product.title
-      .toLowerCase()
-      .includes(searchItem.toLocaleLowerCase());
-    return search;
-  });
+  // let searchedItem = filteredData.filter((product) => {
+  //   const search = product.title
+  //     .toLowerCase()
+  //     .includes(searchItem.toLocaleLowerCase());
+  //   return search;
+  // });
 
-  searchedItem = searchedItem.sort((a, b) => {
-    if (priceSort === "Lowest") {
-      return a.price - b.price;
-    } else if (priceSort === "Highest") {
-      return b.price - a.price;
-    } else if (ratingSort === "Lowest") {
-      return a.rating.rate - b.rating.rate;
-    } else if (ratingSort === "Highest") {
-      return b.rating.rate - a.rating.rate;
-    } else {
-      return 0;
-    }
-  });
+  // searchedItem = filteredData.sort((a, b) => {
+  //   if (priceSort === "Lowest") {
+  //     return a.price - b.price;
+  //   } else if (priceSort === "Highest") {
+  //     return b.price - a.price;
+  //   } else if (ratingSort === "Lowest") {
+  //     return a.rating.rate - b.rating.rate;
+  //   } else if (ratingSort === "Highest") {
+  //     return b.rating.rate - a.rating.rate;
+  //   } else {
+  //     return 0;
+  //   }
+  // });
 
   const handleIncrement = (productId) => {
     setQuantity((prevQuantities) => ({
@@ -66,7 +66,7 @@ function HomePage({ data }) {
 
   return (
     <>
-      <label>
+      {/* <label>
         Search:{" "}
         <input
           type="text"
@@ -101,7 +101,7 @@ function HomePage({ data }) {
       </button>
 
       <br />
-      <br />
+      <br /> */}
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {searchedItem.map((product) => (
           <div
