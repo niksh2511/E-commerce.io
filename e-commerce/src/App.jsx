@@ -23,7 +23,6 @@ function App() {
       {data ? (
         <>   
           <Router>
-            <Navbar />
             <Routes>
               <Route path="/" element={<HomePage data={data} />}/>
 

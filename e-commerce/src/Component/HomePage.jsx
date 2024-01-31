@@ -7,9 +7,9 @@ function HomePage({ data }) {
   const [searchItem, setSearchItem] = useState("");
   const [priceSort, setPriceSort] = useState("");
   const [ratingSort, setRatingSort] = useState("");
-  const [quantity, setQuantity] = useState({});
-  const [itemCount, setItemCount] = useState("")
-  const navigate = useNavigate();
+  const [quantity, setQuantity] = useState({})
+  const navigate = useNavigate()
+
 
   // let searchedItem = filteredData.filter((product) => {
   //   const search = product.title
