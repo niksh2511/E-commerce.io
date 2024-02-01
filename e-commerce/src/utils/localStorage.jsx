@@ -21,6 +21,7 @@ export const getCartItems = () => {
       cartItems.push(cartItem);
     }
   
+
     localStorage.setItem("ItemData", JSON.stringify(cartItems));
     return cartItems;
   };

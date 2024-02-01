@@ -15,19 +15,23 @@ function App() {
       .get(baseURL)
       .then((response) => {
         setData(response.data);
+        console.log(response)
       })
       .catch((error) => console.error(error));
   }, []);
+
+  let items = JSON.parse(localStorage.getItem("ItemData"));
+
 
   return (
     <div>
       {data ? (
         <>
           <Router>
-            <Navbar data={data}/>
+         
             <Routes>
               <Route path="/" element={<HomePage data={data} />} />
-              <Route path="/Cart-list" element={<AddToCart data={data} />} />
+              <Route path="/Cart-list" element={<AddToCart items={items} />} />
             </Routes>
           </Router>
         </>
