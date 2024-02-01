@@ -49,7 +49,7 @@ function AddToCart() {
   //     return a.price - b.price;
   //   } else (priceSort === "Highest") {
   //     return b.price - a.price;
-  //   
+  //
   // });
 
   

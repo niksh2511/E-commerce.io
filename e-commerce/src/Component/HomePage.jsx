@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { addToCart } from "../utils/localStorage";
 import { json, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
+import { Modal } from "bootstrap";
+import Button from "react-bootstrap/Button";
 import "../index.css";
 
 function HomePage({ data }) {
@@ -52,7 +54,26 @@ function HomePage({ data }) {
   const handleAddToCart = (productId) => {
     addToCart(productId, quantity[productId.id] || 1);
     updateTotalQuantity();
-    alert("Item succesfully added to Cart list!!");
+    // alert("Item succesfully added to Cart list!!");
+    <div
+      className="modal show"
+      style={{ display: "block", position: "initial" }}
+    >
+      <Modal.Dialog>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal title</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <p>Modal body text goes here.</p>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary">Close</Button>
+          <Button variant="primary">Save changes</Button>
+        </Modal.Footer>
+      </Modal.Dialog>
+    </div>;
   };
 
   const handleCartNavigate = () => {
