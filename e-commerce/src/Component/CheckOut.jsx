@@ -3,18 +3,20 @@ import { addToCart, getCartItems } from "../utils/localStorage";
 import { useState } from "react";
 import { json, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
+import CheckOutMode from "./Payment";
 
 function AddToCart() {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState(getCartItems()); // Master copy
-  const [filterCartItems, setFilterCartItemls] = useState(getCartItems()) // filter copy
+  const [filterCartItems, setFilterCartItemls] = useState(getCartItems()); // filter copy
   const [total, setTotal] = useState(0);
   const [searchItem, setSearchItem] = useState("");
   const [priceSort, setPriceSort] = useState("");
   const [ratingSort, setRatingSort] = useState("");
-  const [totalItem, setTotalItem] = useState("")
+  const [totalItem, setTotalItem] = useState("");
+  const [showAlertModal, setShowAlertModal] = useState(false);
 
-  
+
   //  cartItems.filter((product) => {
 
   //   console.log(product.ProductName.toLowerCase()
@@ -27,32 +29,21 @@ function AddToCart() {
   // });
 
   useEffect(() => {
-    setFilterCartItemls(cartItems.filter((product) => {
-
-
-      const search = product.ProductName
-        .toLowerCase()
-        .includes(searchItem.toLowerCase());
-      return search;
-    }));
-  }, [searchItem])
-
+    setFilterCartItemls(
+      cartItems.filter((product) => {
+        const search = product.ProductName.toLowerCase().includes(
+          searchItem.toLowerCase()
+        );
+        return search;
+      })
+    );
+  }, [searchItem]);
 
   useEffect(() => {
-
     setFilterCartItemls(cartItems);
-  }, [cartItems])
+  }, [cartItems]);
 
 
-  // searchedItem = searchedItem.sort((a, b) => {
-  //   if (priceSort === "Lowest") {
-  //     return a.price - b.price;
-  //   } else (priceSort === "Highest") {
-  //     return b.price - a.price;
-  //
-  // });
-
-  
 
   // Function to format currency
   const formatCurrency = (value) => {
@@ -110,13 +101,16 @@ function AddToCart() {
     localStorage.setItem("ItemData", JSON.stringify(updatedCartItems));
   };
 
+  const handleCheckOut = () => {
+    setShowAlertModal(true)
+  }
+
   return (
     <>
       <Navbar
-              setSearchItem={setSearchItem}
-              setPriceSort={setPriceSort}
-              setRatingSort={setRatingSort}
-              
+        setSearchItem={setSearchItem}
+        setPriceSort={setPriceSort}
+        setRatingSort={setRatingSort}
       />
       <div className="container mx-auto p-2 mt-6 shadow-xl rounded">
         <table className="w-full">
@@ -179,8 +173,11 @@ function AddToCart() {
             ))}
           </tbody>
         </table>
-        <div className="mt-4 flex justify-end">
-          <p className="text-lg font-bold">Total: {formatCurrency(total)}</p>
+        <div className="mt-4 flex justify-end p-2">
+          <p className="text-lg font-bold mr-2 self-center pr-8">{formatCurrency(total)}</p>
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" onClick={() => handleCheckOut()}>
+            Check Out
+          </button>
         </div>
       </div>
 
@@ -192,6 +189,12 @@ function AddToCart() {
           Continue Shopping?...
         </button>
       </div>
+      {showAlertModal && (
+        <CheckOutMode
+          handleClose={() => setShowAlertModal(false)}
+          subtotal={total}
+        />
+      )}
     </>
   );
 }

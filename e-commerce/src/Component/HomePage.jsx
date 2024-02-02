@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { addToCart } from "../utils/localStorage";
 import { json, useNavigate } from "react-router-dom";
+import AlertModal from "./AlertModel";
 import Navbar from "./Navbar";
-import { Modal } from "bootstrap";
-import Button from "react-bootstrap/Button";
+
 import "../index.css";
 
 function HomePage({ data }) {
@@ -12,6 +12,7 @@ function HomePage({ data }) {
   const [ratingSort, setRatingSort] = useState("");
   const [quantity, setQuantity] = useState({});
   const [itemCount, setItemCount] = useState(0);
+  const [showAlertModal, setShowAlertModal] = useState(false);
   const navigate = useNavigate();
 
   let searchedItem = data.filter((product) => {
@@ -51,44 +52,29 @@ function HomePage({ data }) {
     }
   };
 
+  
   const handleAddToCart = (productId) => {
     addToCart(productId, quantity[productId.id] || 1);
     updateTotalQuantity();
-    // alert("Item succesfully added to Cart list!!");
-    <div
-      className="modal show"
-      style={{ display: "block", position: "initial" }}
-    >
-      <Modal.Dialog>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-          <p>Modal body text goes here.</p>
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button variant="secondary">Close</Button>
-          <Button variant="primary">Save changes</Button>
-        </Modal.Footer>
-      </Modal.Dialog>
-    </div>;
+    setShowAlertModal(true);
   };
 
-  const handleCartNavigate = () => {
-    navigate("/Cart-list");
+  const handleDeactivateAccount = () => {
+    setShowAlertModal(false);
   };
+
+  // const handleCartNavigate = () => {
+  //   navigate("/Cart-list");
+  // };
 
   const updateTotalQuantity = () => {
+    // debugger
     let items = JSON.parse(localStorage.getItem("ItemData"));
-
-    let totalQuantity = 0;
-
+  
     if (items === null) {
       setItemCount(0);
     } else {
-      items.forEach((product) => (totalQuantity += product.Quantity));
+      let totalQuantity = items.length;
       setItemCount(totalQuantity);
     }
   };
@@ -99,6 +85,8 @@ function HomePage({ data }) {
 
   return (
     <>
+     {/* {setShowAlertModal(false) &&  <AlertModal />} */}
+
       <Navbar
         setSearchItem={setSearchItem}
         setPriceSort={setPriceSort}
@@ -158,6 +146,12 @@ function HomePage({ data }) {
           </div>
         ))}
       </div>
+      {showAlertModal && (
+        <AlertModal
+          handleClose={() => setShowAlertModal(false)}
+          handleDeactivate={() => {handleDeactivateAccount}}
+        />
+      )}
     </>
   );
 }

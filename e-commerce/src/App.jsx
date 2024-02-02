@@ -2,23 +2,19 @@ import { useState, useEffect } from "react";
 import HomePage from "./Component/HomePage";
 import AddToCart from "./Component/CheckOut";
 import Navbar from "./Component/Navbar";
-import axios from "axios";
+import { fetchData } from "./utils/fetchData";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-const baseURL = "https://fakestoreapi.com/products";
 
 function App() {
   const [data, setData] = useState(null);
 
-  useEffect(() => {
-    axios
-      .get(baseURL)
-      .then((response) => {
-        setData(response.data);
-        console.log(response)
-      })
-      .catch((error) => console.error(error));
-  }, []);
+
+ useEffect(() => {
+  (async () => {
+    setData(await fetchData("/data.json"))
+  })();
+ }, [])
 
   let items = JSON.parse(localStorage.getItem("ItemData"));
 
