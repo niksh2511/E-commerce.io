@@ -91,9 +91,10 @@ function HomePage({ data }) {
         setSearchItem={setSearchItem}
         setPriceSort={setPriceSort}
         setRatingSort={setRatingSort}
+        itemCount={itemCount}
       />
 
-      <div className="productList">{itemCount}</div>
+      {/* <div className="productList">{itemCount}</div> */}
 
       <br />
       <br />

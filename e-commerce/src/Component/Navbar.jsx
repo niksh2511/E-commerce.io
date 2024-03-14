@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function Navbar({ setSearchItem, setPriceSort, setRatingSort, itemCart }) {
+function Navbar({ setSearchItem, setPriceSort, setRatingSort, itemCount }) {
   useEffect(() => {
   }, []);
 
   return (
-    <nav className="bg-gray-800 p-4 flex justify-between items-center">
+    <nav className="bg-gray-800 p-4 flex justify-between items-center sticky top-0 z-10	">
       <div>
         <Link to="/" className="text-xl font-bold text-purple-200 ">
           <svg
@@ -52,7 +52,7 @@ function Navbar({ setSearchItem, setPriceSort, setRatingSort, itemCart }) {
         </select>
         <Link to="/Cart-list" className="text-yellow-400 py-3 px-5 relative">
           <span className="absolute top-0 right-0 bg-red-500 text-white px-2 py-0.3 rounded-full">
-            {itemCart}
+            {itemCount}
           </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
